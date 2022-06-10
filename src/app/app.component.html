@@ -1,0 +1,23 @@
+<form [formGroup]="checkboxGroup">
+  <ng-container
+    *ngFor="let checkbox of checkboxesList; let i = index"
+    formArrayName="checkboxes"
+  >
+    <input type="checkbox" #chck [formControlName]="i" />{{ checkbox.name }}
+    <div *ngIf="chck.checked">
+      <input type="text" [value]="0" />
+      <button
+        (click)="increment(checkboxGroup.controls.checkboxes.controls[i])"
+      >
+        +
+      </button>
+    </div>
+
+    <br />
+  </ng-container>
+  <button (click)="submit()">Submit</button>
+</form>
+
+Checkbox values: {{ checkboxGroup.controls.checkboxes.value | json }}
+<br />
+Submitted values: {{ submittedValue | json }}
